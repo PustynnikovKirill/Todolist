@@ -15,14 +15,25 @@ function App() {
     const removeTask=(newid:number)=>{
         setTasks1(tasks1.filter((el)=>el.id!==newid))
     }
+    const[valueButton, setValueButton] = useState('All')
 
+    const tasksFilter=(filterValue:string)=>{
+        setValueButton (filterValue)
+    }
+    let prokladka = tasks1
+    if (valueButton === 'Active') {
+        prokladka = tasks1.filter((el)=>el.isDone===true)
+    }
+    if (valueButton === 'Сompleted') {
+        prokladka = tasks1.filter((el)=>el.isDone===false)
+    }
 
     return (
         <div className="App">
         <Todolist title={"What to learn"}
-                  tasks={tasks1}
+                  tasks={prokladka}
                   removeTask={removeTask}
-
+                  tasksFilter={tasksFilter}
         />
     </div>
 )
