@@ -21,8 +21,8 @@ function App() {
     const tasksFilter=(filterValue:string)=>{
         setValueButton (filterValue)
     }
-    const addTask = () => {
-       const newTasks = { id: v1(), title: "newTITLE", isDone: false}
+    const addTask = (newTitle:string) => {
+       const newTasks = { id: v1(), title: newTitle, isDone: false}
         setTasks1([...tasks1,newTasks])
     }
     let prokladka = tasks1
