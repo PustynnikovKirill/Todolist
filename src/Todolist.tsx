@@ -1,4 +1,5 @@
 import React, {useState, KeyboardEvent, ChangeEvent} from 'react';
+import {Button} from "./components/Button";
 
 type TaskType = {
     id: string
@@ -44,13 +45,13 @@ let [newTitle,setNewTitle]= useState('')
             <input value={newTitle}
                    onKeyPress={onKeyPressHandler}
                    onChange={onChangeHandler}/>
-            <button onClick={addTaskHandler}>+</button>
+            <Button name={'+'} callBack={addTaskHandler}/>
         </div>
         <ul>
             {props.tasks.map((el) => {
                 return (
                     <li key={el.id}>
-                        <button onClick={()=>removeTaskHandler(el.id)}>X</button>
+                        <Button name={"x"} callBack={()=>removeTaskHandler(el.id)}/>
                         <input type="checkbox" checked={el.isDone}/>
                         <span>{el.title}</span>
                     </li>
@@ -58,9 +59,13 @@ let [newTitle,setNewTitle]= useState('')
             })}
         </ul>
         <div>
-            <button onClick={()=>filterHandler('All')}>All</button>
-            <button onClick={() => filterHandler('Active')}>Active</button>
-            <button onClick={() => filterHandler('Completed')}>Completed</button>
+            <Button name={"All"} callBack={()=>filterHandler('all')} />
+            <Button name={"Active"} callBack={()=>filterHandler('Active')}/>
+            <Button  name={"Complited"} callBack={()=>filterHandler('Completed')}/>
+
+            {/*<button onClick={}>All</button>*/}
+            {/*<button onClick={() => filterHandler('Active')}>Active</button>*/}
+            {/*<button onClick={() => filterHandler('Completed')}>Completed</button>*/}
         </div>
     </div>
 }
