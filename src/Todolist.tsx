@@ -1,5 +1,6 @@
-import React, {useState, KeyboardEvent, ChangeEvent} from 'react';
-import {Button} from "./components/Button";
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {FilterValuesType} from './App';
+import {FullInput} from "./components/FullInput";
 
 type TaskType = {
     id: string
@@ -10,62 +11,65 @@ type TaskType = {
 type PropsType = {
     title: string
     tasks: Array<TaskType>
-    removeTask: (id: string) => void
-    tasksFilter:(filterValue: string)=>void
-    addTasks:(newTitle:string)=>void
+    removeTask: (taskId: string) => void
+    changeFilter: (value: FilterValuesType) => void
+    addTask: (title: string) => void
 }
 
-
 export function Todolist(props: PropsType) {
-let [newTitle,setNewTitle]= useState('')
 
- const addTaskHandler =()=>{
-     props.addTasks(newTitle)
-     setNewTitle('')
- }
- const onKeyPressHandler =(ev:KeyboardEvent<HTMLInputElement>)=>{
-    if (ev.key==='Enter') {
-        addTaskHandler()
-    }
- }
- const onChangeHandler = (event:ChangeEvent<HTMLInputElement>) =>{
-     setNewTitle(event.currentTarget.value)
- }
+    // let [title, setTitle] = useState("")
 
- const filterHandler =(filterValue:string)=>{
-     props.tasksFilter(filterValue)
- }
- const removeTaskHandler = (elID:string) => {
-     props.removeTask(elID)
- }
+    // const addTask = () => {
+    //     props.addTask(title);
+    //     setTitle("");
+    // }
+
+    // const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    //     setTitle(e.currentTarget.value)
+    // }
+
+    // const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    //     if (e.charCode === 13) {
+    //         addTask();
+    //     }
+    // }
+
+    const onAllClickHandler = () => props.changeFilter("all");
+    const onActiveClickHandler = () => props.changeFilter("active");
+    const onCompletedClickHandler = () => props.changeFilter("completed");
+
     return <div>
-
         <h3>{props.title}</h3>
-        <div>
-            <input value={newTitle}
-                   onKeyPress={onKeyPressHandler}
-                   onChange={onChangeHandler}/>
-            <Button name={'+'} callBack={addTaskHandler}/>
-        </div>
+        <FullInput callBack={props.addTask}/>
+        <>
+            {/*<div>*/}
+            {/*    <input value={title}*/}
+            {/*           onChange={ onChangeHandler }*/}
+            {/*           onKeyPress={ onKeyPressHandler }*/}
+            {/*    />*/}
+            {/*    <button onClick={addTask}>+</button>*/}
+            {/*</div>*/}
+        </>
+
         <ul>
-            {props.tasks.map((el) => {
-                return (
-                    <li key={el.id}>
-                        <Button name={"x"} callBack={()=>removeTaskHandler(el.id)}/>
-                        <input type="checkbox" checked={el.isDone}/>
-                        <span>{el.title}</span>
+            {
+                props.tasks.map(t => {
+
+                    const onClickHandler = () => props.removeTask(t.id)
+
+                    return <li key={t.id}>
+                        <input type="checkbox" checked={t.isDone}/>
+                        <span>{t.title}</span>
+                        <button onClick={ onClickHandler }>x</button>
                     </li>
-                )
-            })}
+                })
+            }
         </ul>
         <div>
-            <Button name={"All"} callBack={()=>filterHandler('all')} />
-            <Button name={"Active"} callBack={()=>filterHandler('Active')}/>
-            <Button  name={"Complited"} callBack={()=>filterHandler('Completed')}/>
-
-            {/*<button onClick={}>All</button>*/}
-            {/*<button onClick={() => filterHandler('Active')}>Active</button>*/}
-            {/*<button onClick={() => filterHandler('Completed')}>Completed</button>*/}
+            <button onClick={ onAllClickHandler }>All</button>
+            <button onClick={ onActiveClickHandler }>Active</button>
+            <button onClick={ onCompletedClickHandler }>Completed</button>
         </div>
     </div>
 }
