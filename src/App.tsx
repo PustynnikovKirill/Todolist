@@ -25,6 +25,9 @@ function App() {
         let newTasks = [task, ...tasks];
         setTasks(newTasks);
     }
+    const changeStatus=(currentId:string,eventStatus:boolean)=>{
+        setTasks(tasks.map((el)=>el.id===currentId ? {...el,isDone:eventStatus}:el))
+    }
 
     let [filter, setFilter] = useState<FilterValuesType>("all");
 
@@ -49,7 +52,8 @@ function App() {
                       tasks={tasksForTodolist}
                       removeTask={removeTask}
                       changeFilter={changeFilter}
-                      addTask={addTask} />
+                      addTask={addTask}
+                        changeStatus={changeStatus}/>
         </div>
     );
 }
