@@ -2,7 +2,11 @@ import React, {useState} from "react";
 import './App.css'
 import {NewComponent} from './NewComponent';
 
- type FilterType = 'ruble'|'dollar'|'all'
+export type FilterType = 'ruble'|'dollar'|'all'
+export type newMoneyType = {
+    banknote: string, nominal: number, number: string
+}
+
 export const App = () => {
     let [money, setMoney] = useState([
         {banknote: 'dollar', nominal: 100, number: 'a82342123'},
@@ -31,7 +35,7 @@ export const App = () => {
 
     return (
 
-     <NewComponent/>
+     <NewComponent newMoney={newMoney} onClickButton={onClickButton}/>
     )
 }
 

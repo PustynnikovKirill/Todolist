@@ -1,11 +1,15 @@
 import React from "react";
+import {FilterType, newMoneyType} from "./App";
 
-
-export const NewComponent =()=> {
+type PropsMoney = {
+    newMoney:newMoneyType[],
+    onClickButton:(name: FilterType)=>void
+}
+export const NewComponent =(props:PropsMoney)=> {
     return (
     <>
         <ul>
-            {newMoney.map((el, index) => {
+            {props.newMoney.map((el, index) => {
                 return (
                     <li key={index}>
                         <span>{el.banknote}</span>
@@ -17,9 +21,9 @@ export const NewComponent =()=> {
 
 
         </ul>
-        <button onClick={() => onClickButton('ruble')}>Rubles</button>
-        <button onClick={() => onClickButton('dollar')}>Dollars</button>
-        <button onClick={() => onClickButton('all')}>All</button>
+        <button onClick={() => props.onClickButton('ruble')}>Rubles</button>
+        <button onClick={() => props.onClickButton('dollar')}>Dollars</button>
+        <button onClick={() => props.onClickButton('all')}>All</button>
     </>
     )
 }
