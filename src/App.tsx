@@ -46,6 +46,7 @@ function App() {
     }
 
 
+    // @ts-ignore
     return (
         <div className="App">
             <Todolist title="What to learn"
@@ -54,7 +55,7 @@ function App() {
                       changeFilter={changeFilter}
                       addTask={addTask}
                       changeStatusCheckbox={changeStatusCheckbox}
-            />
+                      filter={filter}/>
         </div>
     );
 }
