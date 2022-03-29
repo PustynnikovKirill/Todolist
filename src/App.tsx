@@ -25,28 +25,28 @@ function App() {
         let newTasks = [task, ...tasks];
         setTasks(newTasks);
     }
+    const changeBoxStatus = ( currentId:string, eventStatus:boolean) => {
+       setTasks(tasks.map(el=>el.id === currentId ? {...el, isDone: eventStatus} : el))
+
+    }
 
     let [filter, setFilter] = useState<FilterValuesType>("all");
 
     let tasksForTodolist = tasks;
 
     if (filter === "active") {
-        tasksForTodolist = tasks.filter(t => !t.isDone);
+        tasksForTodolist = tasks.filter(t => t.isDone === false);
     }
     if (filter === "completed") {
-        tasksForTodolist = tasks.filter(t => t.isDone);
+        tasksForTodolist = tasks.filter(t => t.isDone === true);
     }
 
     function changeFilter(value: FilterValuesType) {
         setFilter(value);
     }
 
-    const changeStatusCheckbox =(currentID:string,eventStatus:boolean)=>{
-        setTasks(tasks.map((el)=>el.id===currentID ? {...el,isDone:eventStatus}:el))
-    }
 
 
-    // @ts-ignore
     return (
         <div className="App">
             <Todolist title="What to learn"
@@ -54,8 +54,8 @@ function App() {
                       removeTask={removeTask}
                       changeFilter={changeFilter}
                       addTask={addTask}
-                      changeStatusCheckbox={changeStatusCheckbox}
-                      filter={filter}/>
+                      changeBoxStatus={changeBoxStatus}
+            />
         </div>
     );
 }
