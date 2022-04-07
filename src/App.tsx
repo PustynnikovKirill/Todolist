@@ -90,7 +90,13 @@ function App() {
         setTodolists([{id: newID, title: newTitle, filter: "all"},...todolists])
         setTasks({ ...tasks,[newID] : [] })
     }
-
+    
+    const newTaskEditableSpan =(todolistId: string,tId:string,newTitle:string)=> {
+        setTasks({...tasks,[todolistId]:tasks[todolistId].map(el=>el.id===tId ? {...el,title:newTitle} : el)})
+    }
+    const updateTodolistTitle = (todolistId: string, newTitle:string) => {
+        setTodolists(todolists.map(el=>el.id===todolistId ? {...el, title:newTitle} : el))
+    }
 
     return (
         <div className="App">
@@ -118,6 +124,8 @@ function App() {
                         changeTaskStatus={changeStatus}
                         filter={tl.filter}
                         removeTodolist={removeTodolist}
+                        newTaskEditableSpan={newTaskEditableSpan}
+                        updateTodolistTitle={updateTodolistTitle}
                     />
                 })
             }
