@@ -1,6 +1,7 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
-import {FilterValuesType} from './App';
+import {FilterValuesType} from "./App";
 import {FullInput} from "./components/FullInput";
+
 
 export type TaskType = {
     id: string
@@ -14,7 +15,7 @@ type PropsType = {
     tasks: Array<TaskType>
     removeTask: (taskId: string, todolistId: string) => void
     changeFilter: (value: FilterValuesType, todolistId: string) => void
-    addTask: (title: string, todolistId: string) => void
+    addTask: ( todolistId: string,title: string) => void
     changeTaskStatus: (id: string, isDone: boolean, todolistId: string) => void
     removeTodolist: (id: string) => void
     filter: FilterValuesType
@@ -51,14 +52,14 @@ export function Todolist(props: PropsType) {
     const onActiveClickHandler = () => props.changeFilter("active", props.id);
     const onCompletedClickHandler = () => props.changeFilter("completed", props.id);
 
-    const fullInputHandler =()=>{
-
+    const fullInputHandler =(title:string)=>{
+        props.addTask(props.id,title)
     }
     return <div>
         <h3> {props.title}
             <button onClick={removeTodolist}>x</button>
         </h3>
-        <FullInput callback = {fullInputHandler} id={props.id}/>
+        <FullInput callBack = {fullInputHandler} />
         {/*<div>*/}
         {/*    <input value={title}*/}
         {/*           onChange={onChangeHandler}*/}

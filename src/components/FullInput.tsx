@@ -1,14 +1,23 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 
 type fullInputType = {
-    callback:(id:string,newTitle:string)=>void
-    id:string
+    callBack: (title:string) => void
+
 }
-export const FullInput = (props:fullInputType) => {
+export const FullInput = ({callBack,...props}: fullInputType) => {
 
     let [title, setTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
 
+    const addTask = () => {
+        let newTitle = title.trim();
+        if (newTitle !== "") {
+            callBack(newTitle);
+            setTitle("");
+        } else {
+            setError("Title is required");
+        }
+    }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
@@ -18,15 +27,7 @@ export const FullInput = (props:fullInputType) => {
             addTask();
         }
     }
-    const addTask = () => {
-        let newTitle = title.trim();
-        if (newTitle !== "") {
-            props.callback( props.id,newTitle);
-            setTitle("");
-        } else {
-            setError("Title is required");
-        }
-    }
+
 
     return (<div>
             <input value={title}
