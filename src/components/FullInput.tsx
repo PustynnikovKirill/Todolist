@@ -1,9 +1,11 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 
-export type AddItemFormPropsType = {
-    callback:(newTitle:string)=>void
+type fullInputType = {
+    callback:(id:string,newTitle:string)=>void
+    id:string
 }
-export const AddItemForm = (props:AddItemFormPropsType) => {
+export const FullInput = (props:fullInputType) => {
+
     let [title, setTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
 
@@ -19,16 +21,14 @@ export const AddItemForm = (props:AddItemFormPropsType) => {
     const addTask = () => {
         let newTitle = title.trim();
         if (newTitle !== "") {
-            props.callback(newTitle)
-            //props.addTask(newTitle, props.id);
+            props.callback( props.id,newTitle);
             setTitle("");
         } else {
             setError("Title is required");
         }
     }
 
-    return (
-        <div>
+    return (<div>
             <input value={title}
                    onChange={onChangeHandler}
                    onKeyPress={onKeyPressHandler}
@@ -37,5 +37,5 @@ export const AddItemForm = (props:AddItemFormPropsType) => {
             <button onClick={addTask}>+</button>
             {error && <div className="error-message">{error}</div>}
         </div>
-    );
-};
+    )
+}
