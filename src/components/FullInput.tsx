@@ -1,7 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 
 type fullInputType = {
-    callBack: (title:string) => void
+    callBack: (newTitle:string) => void
 
 }
 export const FullInput = ({callBack,...props}: fullInputType) => {
@@ -23,7 +23,7 @@ export const FullInput = ({callBack,...props}: fullInputType) => {
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         setError(null);
-        if (e.key === 'Enter') {
+        if (e.charCode === 13) {
             addTask();
         }
     }

@@ -15,10 +15,11 @@ type PropsType = {
     tasks: Array<TaskType>
     removeTask: (taskId: string, todolistId: string) => void
     changeFilter: (value: FilterValuesType, todolistId: string) => void
-    addTask: ( todolistId: string,title: string) => void
+    addTask: (todolistId: string,title: string) => void
     changeTaskStatus: (id: string, isDone: boolean, todolistId: string) => void
     removeTodolist: (id: string) => void
     filter: FilterValuesType
+
 }
 
 export function Todolist(props: PropsType) {
@@ -30,8 +31,8 @@ export function Todolist(props: PropsType) {
     //     if (newTitle !== "") {
     //         props.addTask(newTitle, props.id);
     //         setTitle("");
-    //     } else {
-    //         setError("Title is required");
+    //     } else {   //
+    // setError("Title is required");
     //     }
     // }
 
@@ -52,8 +53,8 @@ export function Todolist(props: PropsType) {
     const onActiveClickHandler = () => props.changeFilter("active", props.id);
     const onCompletedClickHandler = () => props.changeFilter("completed", props.id);
 
-    const fullInputHandler =(title:string)=>{
-        props.addTask(props.id,title)
+    const fullInputHandler =(newTitle:string)=>{
+        props.addTask(props.id,newTitle)
     }
     return <div>
         <h3> {props.title}
