@@ -40,7 +40,10 @@ function App() {
     function changeFilter(value: FilterValuesType) {
         setFilter(value);
     }
+    const checkboxTaskHandler =(checkId:string, event:boolean)=>{
+        setTasks(tasks.map(el=>el.id === checkId ? {...el,isDone:event} : el))
 
+    }
 
 
     return (
@@ -49,7 +52,9 @@ function App() {
                       tasks={tasksForTodolist}
                       removeTask={removeTask}
                       changeFilter={changeFilter}
-                      addTask={addTask} />
+                      addTask={addTask}
+                      checkboxTaskHandler={checkboxTaskHandler}
+            />
         </div>
     );
 }
