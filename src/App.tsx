@@ -16,7 +16,7 @@ function App() {
     ]);
 
     function removeTask(id: string) {
-        let filteredTasks = tasks.filter(t => t.id !== id);
+        let filteredTasks = tasks.filter(t => t.id != id);
         setTasks(filteredTasks);
     }
 
@@ -42,9 +42,6 @@ function App() {
     }
 
 
-    const onChangeCheckbox =(id:string, value:boolean)=>{
-        setTasks(tasks.map(el=>el.id === id ? {...el,isDone:value}:el))
-    }
 
     return (
         <div className="App">
@@ -52,9 +49,7 @@ function App() {
                       tasks={tasksForTodolist}
                       removeTask={removeTask}
                       changeFilter={changeFilter}
-                      addTask={addTask}
-                      onChangeCheckbox={onChangeCheckbox}
-            />
+                      addTask={addTask} />
         </div>
     );
 }
