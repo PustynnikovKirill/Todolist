@@ -59,6 +59,12 @@ function App() {
         setTasks({...tasks,[newId]: []})
     }
 
+    const ediTableSpan =(todolistId:string,taskId: string,newTitle:string)=>{
+        setTasks({...tasks,[todolistId]:tasks[todolistId].map(el=>el.id===taskId ? {...el,title:newTitle}:el)})
+    }
+    const newTitle = (todolistId:string,newTitle:string) => {
+        setTodolist(todolist.map(el=>el.id===todolistId ? {...el,title:newTitle} : el))
+    }
 
     return (
         <div className="App">
@@ -85,6 +91,8 @@ function App() {
                         addTask={addTask}
                         changeTaskStatus={changeStatus}
                         filter={el.filter}
+                        ediTableSpan ={ediTableSpan}
+                        newTitle={newTitle}
 
                     />
                 )

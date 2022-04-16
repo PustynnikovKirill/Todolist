@@ -18,7 +18,8 @@ export type PropsType = {
     addTask: (todolistId: string, title: string) => void
     changeTaskStatus: (todolistId: string, taskId: string, isDone: boolean) => void
     filter: FilterValuesType
-
+    ediTableSpan:(todolistId:string,taskId: string,newTitle:string)=>void
+    newTitle:(todolistId:string,newTitle:string)=>void
 }
 
 export function Todolist(props: PropsType) {
@@ -60,11 +61,18 @@ export function Todolist(props: PropsType) {
 
     const onClickHandler = (tId: string) => props.removeTask(props.todolistId, tId)
 
+    const newTitleHandler = (taskId: string,newTitle:string) => {
+        props.ediTableSpan(props.todolistId,taskId,newTitle)
+    }
+
+    const propsNewTitle = (newTitle:string)=>{
+        props.newTitle(props.todolistId,newTitle)
+    }
 
     return (
             <div>
 
-                <h3>{props.title}</h3>
+                <h3><EdiTableSpan title={props.title} callBack={propsNewTitle}/></h3>
                 <AddItemForm  callBack={addTaskHandler}/>
                 {/*<div>*/}
                 {/*    <input value={title}*/}
@@ -82,13 +90,15 @@ export function Todolist(props: PropsType) {
                             const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
                                 props.changeTaskStatus(props.todolistId, t.id, e.currentTarget.checked);
                             }
-
+                            const xxx = (newTitle:string) => {
+                                newTitleHandler(t.id,newTitle)
+                            }
                             return <li key={t.id} className={t.isDone ? "is-done" : ""}>
                                 <input type="checkbox"
                                        onChange={onChangeHandler}
                                        checked={t.isDone}/>
 
-                                <EdiTableSpan title={t.title}/>
+                                <EdiTableSpan title={t.title} callBack={xxx}/>
                                 <button onClick={() => onClickHandler(t.id)}>x</button>
                             </li>
                         })

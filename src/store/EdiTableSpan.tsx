@@ -1,19 +1,29 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 
 type propsEdiTableSpanType = {
     title:string
+    callBack:(newTitle:string)=>void
 }
 
 export const EdiTableSpan = (props:propsEdiTableSpanType)=>{
+    let [newTitle, setNewTitle] = useState(props.title)
+
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setNewTitle(e.currentTarget.value)
+    }
+
     let [edit, setEdit] = useState(false)
 
     const turnOnHandler=()=>{
         setEdit(true)
     }
-
-    return(
+    const turnOfHandler = () => {
+      setEdit(false)
+        props.callBack(newTitle)
+    }
+    return (
         edit
-        ? <input value={props.title}/>
+        ? <input value={newTitle} onChange={onChangeHandler} autoFocus onBlur = {turnOfHandler}/>
         : <span onDoubleClick={turnOnHandler}>{props.title}</span>
     )
 }
