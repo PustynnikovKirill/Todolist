@@ -1,13 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-type propsEdiTableSpantype = {
+type propsEdiTableSpanType = {
     title:string
 }
 
-export const EdiTableSpan =(props:propsEdiTableSpantype)=>{
+export const EdiTableSpan = (props:propsEdiTableSpanType)=>{
+    let [edit, setEdit] = useState(false)
+
+    const turnOnHandler=()=>{
+        setEdit(true)
+    }
 
     return(
-        <input/>
-        //<span>{props.title}</span>
+        edit
+        ? <input value={props.title}/>
+        : <span onDoubleClick={turnOnHandler}>{props.title}</span>
     )
 }
