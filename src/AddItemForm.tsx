@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {Button} from "@mui/material";
+import {Button, TextField} from "@mui/material";
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
@@ -8,14 +8,14 @@ type AddItemFormPropsType = {
 export function AddItemForm(props: AddItemFormPropsType) {
 
     let [title, setTitle] = useState("")
-    let [error, setError] = useState<string | null>(null)
+    let [error, setError] = useState<boolean>(false)
 
     const addItem = () => {
         if (title.trim() !== "") {
             props.addItem(title);
             setTitle("");
         } else {
-            setError("Title is required");
+            setError(true);
         }
     }
 
@@ -24,22 +24,31 @@ export function AddItemForm(props: AddItemFormPropsType) {
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null);
+        setError(false);
         if (e.charCode === 13) {
             addItem();
         }
     }
 
     return <div>
-        <input value={title}
-               onChange={onChangeHandler}
-               onKeyPress={onKeyPressHandler}
-               className={error ? "error" : ""}
+        <TextField value={title}
+                   onChange={onChangeHandler}
+                   onKeyPress={onKeyPressHandler}
+                   className={error ? "error" : ""}
+                   size={'small'}
+                   id="outlined-basic" label="Title is required" variant="outlined"
+                    error={error}
         />
-        <Button onClick={addItem} variant="contained" style={{maxWidth: '30px',maxHeight:'30px', minWidth:'30px',minHeight:'30px', backgroundColor: 'black'  }}>x</Button>
+
+        {/*<input value={title}*/}
+        {/*       onChange={onChangeHandler}*/}
+        {/*       onKeyPress={onKeyPressHandler}*/}
+        {/*       className={error ? "error" : ""}*/}
+        {/*/>*/}
+        <Button onClick={addItem} variant="contained" style={{maxWidth: '40px',maxHeight:'40px', minWidth:'40px',minHeight:'40px', backgroundColor: 'black'  }}>x</Button>
 
         {/*<button onClick={addItem}>+</button>*/}
 
-        {error && <div className="error-message">{error}</div>}
+        {/*{error && <div className="error-message">{error}</div>}*/}
     </div>
 }
