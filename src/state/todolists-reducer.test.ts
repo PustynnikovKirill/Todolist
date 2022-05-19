@@ -8,6 +8,7 @@ import {
 import {v1} from 'uuid';
 import {FilterValuesType, TodolistType} from '../App';
 
+
 let todolistId1: string;
 let todolistId2: string;
 let startState: Array<TodolistType> = [];

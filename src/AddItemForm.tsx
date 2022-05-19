@@ -1,30 +1,35 @@
-import React, {ChangeEvent, KeyboardEvent, memo, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {Box, Button, FormControl, IconButton, TextField} from '@material-ui/core';
 import {AddBox} from '@material-ui/icons';
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
+    value: string
+    onChangeValueTextField: (value: string) => void
 }
 
-export const AddItemForm = memo ((props: AddItemFormPropsType) => {
-    let [title, setTitle] = useState("")
+export const AddItemForm = (props: AddItemFormPropsType) => {
+    console.log("AddItemForm1 is called")
     let [error, setError] = useState<string | null>(null)
+    const {value} = props
 
     const addItem = () => {
-        if (title.trim() !== "") {
-            props.addItem(title);
-            setTitle("");
+        if (value.trim() !== "") {
+            props.addItem(value);
+            props.onChangeValueTextField('');
         } else {
             setError("Title is required");
         }
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.currentTarget.value)
+        props.onChangeValueTextField(e.currentTarget.value);
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (error) setError(null);
+        if (error !== null) {
+            setError(null);
+        }
         if (e.charCode === 13) {
             addItem();
         }
@@ -33,7 +38,7 @@ export const AddItemForm = memo ((props: AddItemFormPropsType) => {
     return <div>
         <TextField variant="outlined"
                    error={!!error}
-                   value={title}
+                   value={value}
                    onChange={onChangeHandler}
                    onKeyPress={onKeyPressHandler}
                    label="Title"
@@ -43,4 +48,4 @@ export const AddItemForm = memo ((props: AddItemFormPropsType) => {
             <AddBox />
         </IconButton>
     </div>
-})
+}
