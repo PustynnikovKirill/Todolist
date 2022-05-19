@@ -8,7 +8,7 @@ type AddItemFormPropsType = {
     onChangeValueTextField: (value: string) => void
 }
 
-export const AddItemForm = (props: AddItemFormPropsType) => {
+ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
     console.log("AddItemForm1 is called")
     let [error, setError] = useState<string | null>(null)
     const {value} = props
@@ -30,7 +30,7 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
         if (error !== null) {
             setError(null);
         }
-        if (e.charCode === 13) {
+        if (e.key === 'Enter') {
             addItem();
         }
     }
@@ -48,4 +48,4 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
             <AddBox />
         </IconButton>
     </div>
-}
+})
