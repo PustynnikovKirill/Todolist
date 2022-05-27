@@ -4,33 +4,31 @@ import {AddBox} from '@material-ui/icons';
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
-    value: string
-    onChangeValueTextField: (value: string) => void
 }
 
- export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
-    console.log("AddItemForm1 is called")
+export const AddItemForm = React.memo( (props: AddItemFormPropsType) => {
+    console.log("AddItemForm is called")
+    let [title, setTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
-    const {value} = props
 
     const addItem = () => {
-        if (value.trim() !== "") {
-            props.addItem(value);
-            props.onChangeValueTextField('');
+        if (title.trim() !== "") {
+            props.addItem(title);
+            setTitle("");
         } else {
             setError("Title is required");
         }
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        props.onChangeValueTextField(e.currentTarget.value);
+        setTitle(e.currentTarget.value)
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (error !== null) {
             setError(null);
         }
-        if (e.key === 'Enter') {
+        if (e.charCode === 13) {
             addItem();
         }
     }
@@ -38,7 +36,7 @@ type AddItemFormPropsType = {
     return <div>
         <TextField variant="outlined"
                    error={!!error}
-                   value={value}
+                   value={title}
                    onChange={onChangeHandler}
                    onKeyPress={onKeyPressHandler}
                    label="Title"
@@ -48,4 +46,4 @@ type AddItemFormPropsType = {
             <AddBox />
         </IconButton>
     </div>
-})
+} );

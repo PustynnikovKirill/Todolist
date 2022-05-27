@@ -1,10 +1,10 @@
 import React, {useCallback} from 'react'
 import {FilterValuesType} from './App'
+import {AddItemForm} from './AddItemForm'
 import {EditableSpan} from './EditableSpan'
 import {Button, IconButton} from '@material-ui/core'
 import {Delete} from '@material-ui/icons'
 import {Task} from './Task'
-import {AddItemForm} from "./AddItemForm";
 
 export type TaskType = {
     id: string
@@ -24,12 +24,11 @@ type PropsType = {
     removeTodolist: (id: string) => void
     changeTodolistTitle: (id: string, newTitle: string) => void
     filter: FilterValuesType
-    titleTask: string
-    onChangeTitleTask: (value: string) => void
 
 }
 
 export const Todolist = React.memo(function (props: PropsType) {
+    console.log('Todolist is called')
     const addTask = useCallback((title: string) => {
         props.addTask(title, props.id)
     }, [props.addTask, props.id])
@@ -60,11 +59,7 @@ export const Todolist = React.memo(function (props: PropsType) {
                 <Delete/>
             </IconButton>
         </h3>
-        <AddItemForm
-            value={props.titleTask}
-            addItem={addTask}
-            onChangeValueTextField={props.onChangeTitleTask}
-        />
+        <AddItemForm addItem={addTask}/>
         <div>
             {
                 tasksForTodolist.map(t => <Task
