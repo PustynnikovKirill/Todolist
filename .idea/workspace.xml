@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36cb619c-bb8d-4813-992a-47da44f03dd1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/state/todolists-task-reducer.test.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/state/task-reducer.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/task-reducer.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/state/task-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/task-reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/state/todolists-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/todolists-reducer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +122,7 @@
       <option name="presentableId" value="Default" />
       <updated>1654928109122</updated>
       <workItem from="1654928122753" duration="11795000" />
-      <workItem from="1655029847496" duration="8678000" />
+      <workItem from="1655029847496" duration="9769000" />
     </task>
     <servers />
   </component>
