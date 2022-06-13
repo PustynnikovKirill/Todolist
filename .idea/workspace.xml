@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="36cb619c-bb8d-4813-992a-47da44f03dd1" name="Changes" comment="">
+    <list default="true" id="9c0865ec-cbaf-4885-a19e-7e16ea41d0e6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/AppWithReducer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/state/task-reducer.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/task-reducer.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/state/task-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/task-reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/todolists-reducer.test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/todolists-reducer.test.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/todolists-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/todolists-reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/todolists-task-reducer.test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/todolists-task-reducer.test.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +21,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2AQ3iSjp072vGFHscVqNGMr1Avi" />
+  <component name="ProjectId" id="2AVjiSmD1mAsSpYBWbgpXgrWo9C" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -26,103 +30,28 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/state" />
-    <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/react-scripts" />
-    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="yarn" />
     <property name="ts.external.directory.path" value="E:\TODOLIST\Todolist\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\TODOLIST\Todolist\src" />
       <recent name="E:\TODOLIST\Todolist\src\state" />
     </key>
-  </component>
-  <component name="RunManager" selected="Jest.new array should be added when new todolist is added">
-    <configuration name="correct task should be added to correct array" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/src/state/task-reducer.test.ts" />
-      <test-names>
-        <test-name value="correct task should be added to correct array" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="correct title " type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/src/state/task-reducer.test.ts" />
-      <test-names>
-        <test-name value="correct title " />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="ids should be equals" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/src/state/todolists-task-reducer.test.tsx" />
-      <test-names>
-        <test-name value="ids should be equals" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="new array should be added when new todolist is added" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/src/state/task-reducer.test.ts" />
-      <test-names>
-        <test-name value="new array should be added when new todolist is added" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="status of specified task should be changed" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/src/state/task-reducer.test.ts" />
-      <test-names>
-        <test-name value="status of specified task should be changed" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Jest.new array should be added when new todolist is added" />
-        <item itemvalue="Jest.ids should be equals" />
-        <item itemvalue="Jest.correct task should be added to correct array" />
-        <item itemvalue="Jest.correct title " />
-        <item itemvalue="Jest.status of specified task should be changed" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="36cb619c-bb8d-4813-992a-47da44f03dd1" name="Changes" comment="" />
-      <created>1654928109122</created>
+      <changelist id="9c0865ec-cbaf-4885-a19e-7e16ea41d0e6" name="Changes" comment="" />
+      <created>1655101774018</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1654928109122</updated>
-      <workItem from="1654928122753" duration="11795000" />
-      <workItem from="1655029847496" duration="9769000" />
+      <updated>1655101774018</updated>
+      <workItem from="1655101798434" duration="5128000" />
     </task>
     <servers />
   </component>
