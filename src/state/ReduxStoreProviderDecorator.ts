@@ -3,6 +3,6 @@ import {Provider} from "react";
 import {store} from "./store";
 
 
-export const ReduxStoreProviderDecorator = (storyFn: ()=> React.ReactComponentElement<any>) => {
+export const ReduxStoreProviderDecorator = (storyFn: any) => {
    return <Provider store = {store}> {storyFn()} </Provider>
 }

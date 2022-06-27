@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a2e2562a-a3c4-4a6d-80f9-ab7df86bf2a3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/state/ReduxStoreProviderDecorator.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stories/AppWithRedux.stories.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/Task.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/stories/Task.stories.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/ReduxStoreProviderDecorator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/ReduxStoreProviderDecorator.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +52,7 @@
       <option name="presentableId" value="Default" />
       <updated>1655880670168</updated>
       <workItem from="1655880672795" duration="16306000" />
-      <workItem from="1656070692735" duration="1553000" />
+      <workItem from="1656070692735" duration="3912000" />
     </task>
     <servers />
   </component>
