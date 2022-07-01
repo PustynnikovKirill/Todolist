@@ -5,14 +5,14 @@ import {todolistAPI} from "../api/todolist-api";
 export default {
     title: 'API'
 }
-
-const settings = {
-    withCredentials: true,
-    headers: {
-        // Не забываем заменить API-KEY на собственный
-        'API-KEY': '1e51101a-ead9-4f92-851f-b9eb36d46d8d'
-    }
-}
+//
+// const settings = {
+//     withCredentials: true,
+//     headers: {
+//         // Не забываем заменить API-KEY на собственный
+//         'API-KEY': '1e51101a-ead9-4f92-851f-b9eb36d46d8d'
+//     }
+// }
 
 export const GetTodolists = () => {
     const [state, setState] = useState<any>(null)
@@ -36,10 +36,10 @@ export const GetTodolists = () => {
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        const promise = todolistAPI.createTodolist('RESP')
-        promise.then((resp) => {
-            setState(resp.data)
-        })
+        todolistAPI.createTodolist('RESPect')
+            .then((resp) => {
+                setState(resp.data)
+            })
 
     }, [])
 
@@ -48,7 +48,7 @@ export const CreateTodolist = () => {
 export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        const todolistId = 'e30a0d1b-013d-4eb6-8c44-8652ff151cf9';
+        const todolistId = "572739e2-f6bf-4f10-bd2f-6566f827d5c7";
         const promise = todolistAPI.deleteTodolist(todolistId)
         promise.then((res) => {
             setState(res.data);
