@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2b85e02f-d0bd-4622-8672-4d6155639736" name="Changes" comment="">
+    <list default="true" id="94ef5180-cff1-43be-a9c3-63111fe26696" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/state/todolist-reduser.test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/state/todolist-task-reduser.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/todolist-api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/todolist-api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.storybook/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.storybook/preview.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Task.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Todolist.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Todolist.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/todolist-api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/tasks-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/tasks-reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/todolists-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/todolists-reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/todolists-api.stories.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +39,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2BKXnWH9Yy4e38NpXci1R9LIwq0" />
+  <component name="ProjectId" id="2BmtDH2C59bLPEOUDNH8zN5BhJ4" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -32,21 +48,46 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/state" />
+    <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/react-scripts" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="ts.external.directory.path" value="E:\TODOLIST\Todolist\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\TODOLIST\Todolist\src\state" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="todolists should be set to the state" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/state/todolist-reduser.test.ts" />
+      <test-names>
+        <test-name value="todolists should be set to the state" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Jest.todolists should be set to the state" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="2b85e02f-d0bd-4622-8672-4d6155639736" name="Changes" comment="" />
-      <created>1656655917832</created>
+      <changelist id="94ef5180-cff1-43be-a9c3-63111fe26696" name="Changes" comment="" />
+      <created>1657522966573</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1656655917832</updated>
-      <workItem from="1656655920346" duration="20696000" />
+      <updated>1657522966573</updated>
+      <workItem from="1657522968071" duration="8966000" />
     </task>
     <servers />
   </component>
