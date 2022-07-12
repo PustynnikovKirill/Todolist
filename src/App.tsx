@@ -14,7 +14,7 @@ import { Menu } from '@mui/icons-material';
 import {
     addTodolistAC,
     changeTodolistFilterAC,
-    changeTodolistTitleAC,
+    changeTodolistTitleAC, fetchTodolistsTC,
     FilterValuesType,
     removeTodolistAC, setTodosAC,
     TodolistDomainType
@@ -78,9 +78,7 @@ function App() {
 
 
     useEffect(()=>{
-        todolistsAPI.getTodolists().then((res) => {
-            dispatch(setTodosAC(res.data))
-        })
+        dispatch(fetchTodolistsTC())
     },[])
 
     return (
