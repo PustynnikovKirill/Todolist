@@ -1,7 +1,8 @@
-import { TasksStateType } from '../App';
+import {TasksStateType} from '../App';
 import {AddTodolistActionType, RemoveTodolistActionType, SetTodosType} from './todolists-reducer';
-import {TaskStatuses, TaskType, todolistsAPI} from '../api/todolists-api'
+import {TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelType} from '../api/todolists-api'
 import {Dispatch} from "redux";
+import {AppRootStateType} from "./store";
 
 export type RemoveTaskActionType = {
     type: 'REMOVE-TASK',
@@ -62,8 +63,8 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
         }
         case "SET-TODOS": {
             const stateCopy = {...state}
-            action.payload.todos.forEach((tl)=>{
-                stateCopy[tl.id]=[]
+            action.payload.todos.forEach((tl) => {
+                stateCopy[tl.id] = []
             })
             return stateCopy
         }
@@ -126,41 +127,68 @@ export const changeTaskStatusAC = (taskId: string, status: TaskStatuses, todolis
 export const changeTaskTitleAC = (taskId: string, title: string, todolistId: string): ChangeTaskTitleActionType => {
     return {type: 'CHANGE-TASK-TITLE', title, todolistId, taskId}
 }
-export const setTasksAC = (todolistId:string,task:TaskType[]) => {
+export const setTasksAC = (todolistId: string, task: TaskType[]) => {
     return {type: "SET-TASK", payload: {todolistId, task}} as const
 }
-export const addTaskAC = (task:TaskType) => {
+export const addTaskAC = (task: TaskType) => {
     return {type: "ADD-TASK", task} as const
 }
 
 
-export const fetchTaskTC = (todolistId: string) =>{
-    return (dispatch:Dispatch)=>{
+export const fetchTaskTC = (todolistId: string) => {
+    return (dispatch: Dispatch) => {
         todolistsAPI.getTasks(todolistId)
-            .then((res)=>{
-            const task = res.data.items
-                const action = setTasksAC(todolistId,task)
+            .then((res) => {
+                const task = res.data.items
+                const action = setTasksAC(todolistId, task)
                 dispatch(action)
-        })
+            })
 
     }
 }
-export const createTasks = (todolistId:string,title:string) =>{
-    return (dispatch:Dispatch)=>{
-        todolistsAPI.createTask(todolistId,title)
-            .then((res)=>{
+export const createTasks = (todolistId: string, title: string) => {
+    return (dispatch: Dispatch) => {
+        todolistsAPI.createTask(todolistId, title)
+            .then((res) => {
                 const action = addTaskAC(res.data.data.item)
                 dispatch(action)
             })
     }
 }
 
-export const temoveTasks = (taskId: string,todolistId: string) =>{
-    return (dispatch:Dispatch)=>{
-        todolistsAPI.deleteTask(todolistId,taskId)
-            .then((res)=>{
-                const action = addTaskAC(res.data.data.item)
-                dispatch(action)
+export const removeTasksTC = (taskId: string, todolistId: string) => {
+    return (dispatch: Dispatch) => {
+        todolistsAPI.deleteTask(todolistId, taskId)
+            .then((res) => {
+                if (res.data.resultCode === 0) {
+                    dispatch(removeTaskAC(taskId, todolistId))
+                }
+
             })
+
+    }
+}
+export const updateTaskStatusTS = (taskId: string, todolistId: string, status: TaskStatuses) => {
+    return (dispatch: Dispatch, getState: () => AppRootStateType) => {
+        const allTasksFromState = getState().tasks
+        const task = allTasksFromState[todolistId].find(t=> t.id === taskId)
+           if (task) {
+               const model:UpdateTaskModelType = {
+                   title: task.title,
+                   status,
+                   deadline: task.deadline,
+                   description: task.description,
+                   priority: task.priority,
+                   startDate: task.startDate
+
+           }
+               todolistsAPI.updateTask(todolistId,taskId,model)
+                   .then((res)=>{
+                      dispatch(changeTaskStatusAC(taskId,status,todolistId))
+                   })
+        }
+
+
+
     }
 }
