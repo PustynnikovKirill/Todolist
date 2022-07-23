@@ -4,6 +4,7 @@ import {Dispatch} from 'redux'
 import {AppRootStateType} from '../../app/store'
 import {AppActionsType, setAppErrorAC, setAppStatusAC} from "../../app/app-reducer";
 import {AxiosError} from "axios";
+import {handleServerError, handleServerNetworkError} from "../../utils/Utils";
 
 const initialState: TasksStateType = {}
 
@@ -86,7 +87,10 @@ export const addTaskTC = (title: string, todolistId: string) => (dispatch: Dispa
             }
         })
         .catch((error:AxiosError)=>{
-            dispatch(setAppErrorAC(error.message))
+            handleServerNetworkError(error.message,dispatch)
+            // dispatch(setAppErrorAC(error.message))
+            // dispatch(setAppStatusAC('failed'))
+
         })
 }
 export const updateTaskTC = (taskId: string, domainModel: UpdateDomainTaskModelType, todolistId: string) =>
@@ -118,15 +122,15 @@ export const updateTaskTC = (taskId: string, domainModel: UpdateDomainTaskModelT
                     dispatch(setAppStatusAC('succeeded'))
 
                 } else {
-                    if (res.data.messages.length) {
-                        dispatch(setAppErrorAC(res.data.messages[0]))
-                    } else {
-                        dispatch(setAppErrorAC('Some error'))
-                    }
-                    dispatch(setAppStatusAC('failed'))
+                    handleServerError(res.data,dispatch)
                 }
 
+
             })
+            .catch((error:AxiosError)=> {
+                handleServerNetworkError(error.message, dispatch)
+            })
+
     }
 
 // types
@@ -141,7 +145,7 @@ export type UpdateDomainTaskModelType = {
 export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
-type ActionsType =
+export type ActionsType =
     | ReturnType<typeof removeTaskAC>
     | ReturnType<typeof addTaskAC>
     | ReturnType<typeof updateTaskAC>
