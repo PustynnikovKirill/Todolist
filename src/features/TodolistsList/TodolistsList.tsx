@@ -29,7 +29,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
         (state)=>state.auth.isLoggedIn)
 
     useEffect(() => {
-        if (demo) {
+        if (!isLoggedIn) {
             return;
         }
         const thunk = fetchTodolistsTC()

@@ -42,12 +42,25 @@ export type LoginParamsType = {
     rememberMe?: boolean
     captcha?:string
 }
+type AuthMeType = {
+    id:number,
+    email:string,
+    login: string
+
+}
 
 export const authAPI = {
     login (data:LoginParamsType) {
             return instance.post<LoginParamsType, AxiosResponse<ResponseType<{ userId: string }>>>(`/auth/login`,data);
+    },
+    me() {
+        return instance.get<ResponseType<AuthMeType>>(`auth/me`);
+    },
+    logout() {
+        return instance.delete<ResponseType>(`/auth/login`);
     }
 }
+
 
 
 // types
