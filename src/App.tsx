@@ -1,20 +1,25 @@
 import React, {useState} from 'react';
 import './App.css';
 import {Todolist} from "./Todolist";
+import {v1} from "uuid";
 
 export type FilterType = 'all'|'active'|'completed'
 
 export const App = () => {
     let [tasks,setTasks] = useState(
         [
-            { id: 1, title: "HTML&CSS", isDone: true },
-            { id: 2, title: "JS", isDone: true },
-            { id: 3, title: "ReactJS", isDone: false },
-            { id: 4, title: "Rest API", isDone: true },
-            { id: 5, title: "GraphQL", isDone: false }
+            { id: v1(), title: "HTML&CSS", isDone: true },
+            { id: v1(), title: "JS", isDone: true },
+            { id: v1(), title: "ReactJS", isDone: false },
+            { id: v1(), title: "Rest API", isDone: true },
+            { id: v1(), title: "GraphQL", isDone: false }
         ]
     )
     let [filter,setFilter] = useState<FilterType>('active')
+
+     let [title,setInput] = useState('')
+
+
 
     let taskForTodolist = tasks
 
@@ -25,14 +30,19 @@ export const App = () => {
         taskForTodolist = tasks.filter(el=>el.isDone === true)
     }
 
+
     const onClickFilter = (filter:FilterType) => {
         setFilter(filter)
     }
 
-    const onClickDeleteTask = (id:number) => {
+    const onClickDeleteTask = (id:string) => {
         setTasks(tasks.filter(el=>el.id !== id))
     }
 
+    const onClickButtonInput = () => {
+        let newTask =  {id: v1(), title, isDone: true }
+        setTasks([...tasks, newTask])
+    }
 
     return (
         <div className="App">
@@ -40,8 +50,10 @@ export const App = () => {
                      tasks={taskForTodolist}
                      onClickRemoveTask = {onClickDeleteTask}
                      onClickFilter = {onClickFilter}
+                     title = {title}
+                     setInput = {setInput}
+                     onClickButtonInput={onClickButtonInput}
            />
-
         </div>
     );
 }
