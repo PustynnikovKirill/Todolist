@@ -17,17 +17,16 @@ export const App = () => {
     )
     let [filter,setFilter] = useState<FilterType>('active')
 
-     let [title,setInput] = useState('')
 
 
 
     let taskForTodolist = tasks
 
     if (filter === 'completed') {
-        taskForTodolist = tasks.filter(el=>el.isDone === false)
+        taskForTodolist = tasks.filter(el=>el.isDone === true)
     }
     if (filter === 'active') {
-        taskForTodolist = tasks.filter(el=>el.isDone === true)
+        taskForTodolist = tasks.filter(el=>el.isDone === false)
     }
 
 
@@ -39,20 +38,21 @@ export const App = () => {
         setTasks(tasks.filter(el=>el.id !== id))
     }
 
-    const onClickButtonInput = () => {
-        let newTask =  {id: v1(), title, isDone: true }
-        setTasks([...tasks, newTask])
+    const addTask = (title:string) => {
+            let newTask = {id: v1(), title, isDone: false }
+            setTasks([...tasks, newTask])
     }
-
+    const changTaskStatus = (id:string,checked:boolean) => {
+       setTasks(tasks.map(el=>el.id === id ? {...el, isDone:checked}: el))
+    }
     return (
         <div className="App">
            <Todolist name = "Hey"
                      tasks={taskForTodolist}
                      onClickRemoveTask = {onClickDeleteTask}
                      onClickFilter = {onClickFilter}
-                     title = {title}
-                     setInput = {setInput}
-                     onClickButtonInput={onClickButtonInput}
+                     addTask={addTask}
+                     changTaskStatus = {changTaskStatus}
            />
         </div>
     );

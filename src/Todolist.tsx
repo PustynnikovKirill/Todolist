@@ -1,4 +1,4 @@
-import React, {ChangeEvent,KeyboardEvent} from "react";
+import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {FilterType} from "./App";
 
 
@@ -7,9 +7,8 @@ export type TodolistType = {
     tasks: TaskType[]
     onClickRemoveTask:(id:string)=>void
     onClickFilter:(filter:FilterType)=>void
-    title: string
-    setInput:(title:string)=>void
-    onClickButtonInput: ()=> void
+    addTask: (title:string)=> void
+    changTaskStatus:(id:string,checked:boolean)=>void
 }
 export type TaskType = {
     id: string,
@@ -21,9 +20,11 @@ export type TaskType = {
 
 export const Todolist: React.FC<TodolistType> = ({name, tasks,
                                                      onClickRemoveTask,onClickFilter,
-                                                     title,setInput,onClickButtonInput
+                                                     addTask, changTaskStatus
                                                  }) => {
-   const onClickRemoveHandler = (id:string) => {
+    let [title,setTitle] = useState('')
+
+    const onClickRemoveHandler = (id:string) => {
        onClickRemoveTask(id)
     }
 
@@ -37,19 +38,25 @@ export const Todolist: React.FC<TodolistType> = ({name, tasks,
         onClickFilter('completed')
     }
     const onChangeInputHandler = (event:ChangeEvent<HTMLInputElement>) => {
-        setInput(event.currentTarget.value)
+       setTitle(event.currentTarget.value)
     }
     const onClickInputButtonHandler = () => {
-        onClickButtonInput()
-        setInput(" ")
+        if (title.trim() !== ''){
+            addTask(title.trim())
+            setTitle('')
+        }
 
     }
     const onKeyPressHandler = (event:KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
-            onClickButtonInput()
-            setInput(" ")
+        if (title.trim() !== ''){
+            if (event.key === 'Enter') {
+                addTask(title)
+                setTitle('')
+            }
         }
+
     }
+
     return (
         <div>
             <h3>{name}</h3>
@@ -64,8 +71,11 @@ export const Todolist: React.FC<TodolistType> = ({name, tasks,
                     const onClickRemoveMapHandler = () => {
                         onClickRemoveHandler(el.id)
                     }
+                    const onChangeHandler = (ev:ChangeEvent<HTMLInputElement>) => {
+                        changTaskStatus(el.id,ev.currentTarget.checked)
+                    }
                     return <li key={el.id}>
-                        <input type="checkbox" checked={el.isDone}/>
+                        <input type="checkbox" checked={el.isDone} onChange={onChangeHandler}/>
                         <span>{el.title}</span>
                         <button onClick={onClickRemoveMapHandler}>✖</button>
                     </li>
