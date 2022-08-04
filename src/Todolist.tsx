@@ -9,6 +9,7 @@ export type TodolistType = {
     onClickFilter:(filter:FilterType)=>void
     addTask: (title:string)=> void
     changTaskStatus:(id:string,checked:boolean)=>void
+    filter:FilterType
 }
 export type TaskType = {
     id: string,
@@ -20,9 +21,10 @@ export type TaskType = {
 
 export const Todolist: React.FC<TodolistType> = ({name, tasks,
                                                      onClickRemoveTask,onClickFilter,
-                                                     addTask, changTaskStatus
+                                                     addTask, changTaskStatus,filter
                                                  }) => {
     let [title,setTitle] = useState('')
+    let [error,setError] = useState<string | null>(null)
 
     const onClickRemoveHandler = (id:string) => {
        onClickRemoveTask(id)
@@ -44,10 +46,13 @@ export const Todolist: React.FC<TodolistType> = ({name, tasks,
         if (title.trim() !== ''){
             addTask(title.trim())
             setTitle('')
+        } else {
+            setError('Title is requerid')
         }
 
     }
     const onKeyPressHandler = (event:KeyboardEvent<HTMLInputElement>) => {
+        setError(null)
         if (title.trim() !== ''){
             if (event.key === 'Enter') {
                 addTask(title)
@@ -63,8 +68,9 @@ export const Todolist: React.FC<TodolistType> = ({name, tasks,
             <div>
 
                 <input value = {title} onKeyPress={onKeyPressHandler}
-                       onChange = {onChangeInputHandler}/>
+                       onChange = {onChangeInputHandler} className={error ? 'error':''}/>
                 <button onClick={onClickInputButtonHandler}>+</button>
+                {error && <div className={'error-message'}>{error}</div>}
             </div>
             <ul>
                 {tasks.map(el => {
@@ -74,7 +80,7 @@ export const Todolist: React.FC<TodolistType> = ({name, tasks,
                     const onChangeHandler = (ev:ChangeEvent<HTMLInputElement>) => {
                         changTaskStatus(el.id,ev.currentTarget.checked)
                     }
-                    return <li key={el.id}>
+                    return <li key={el.id} className={el.isDone === true ? 'is-done':''}>
                         <input type="checkbox" checked={el.isDone} onChange={onChangeHandler}/>
                         <span>{el.title}</span>
                         <button onClick={onClickRemoveMapHandler}>✖</button>
@@ -82,9 +88,9 @@ export const Todolist: React.FC<TodolistType> = ({name, tasks,
                 })}
             </ul>
             <div>
-                <button onClick={onClickButtonAllHandler}>All</button>
-                <button onClick={onClickButtonActiveHandler}>Active</button>
-                <button onClick={onClickButtonCompletedHandler}>Completed</button>
+                <button onClick={onClickButtonAllHandler} className={filter === 'all' ? 'active-filter':''}>All</button>
+                <button onClick={onClickButtonActiveHandler} className={filter === 'active' ? 'active-filter':''}>Active</button>
+                <button onClick={onClickButtonCompletedHandler} className={filter === 'completed' ? 'active-filter':''}>Completed</button>
             </div>
         </div>
     )

@@ -53,6 +53,7 @@ export const App = () => {
                      onClickFilter = {onClickFilter}
                      addTask={addTask}
                      changTaskStatus = {changTaskStatus}
+                     filter = {filter}
            />
         </div>
     );
