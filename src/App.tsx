@@ -26,11 +26,10 @@ export const App = () => {
     ])
 
     let [tasks, setTasks] = useState<TasksStateType>({
-        [todolistID1]: [
+        [todolistID1]:[
             {id: v1(), title: 'HTML&CSS', isDone: true},
             {id: v1(), title: 'JS', isDone: true},
             {id: v1(), title: 'ReactJS', isDone: false},
-
         ],
         [todolistID2]: [
             {id: v1(), title: 'Rest API', isDone: true},
@@ -66,6 +65,12 @@ export const App = () => {
     const removeTodolist = (todolistId:string) => {
         setTodolists(todolists.filter(el=> el.id !== todolistId))
     }
+    const onChangeTodolist = (todolistId:string,id:string,newTitle:string) => {
+        setTasks({...tasks,[todolistId]:[...tasks[todolistId].map(el=>el.id === id ? {...el, title:newTitle}:el)]})
+    }
+    const onChangeNameTodolists = (todolistId:string,newTitle:string) => {
+        setTodolists(todolists.map(el=>el.id === todolistId ? {...el, title:newTitle}:el))
+    }
     return (
         <div className="App">
             <AddItemForm  addItem = {addTodolist}/>
@@ -91,6 +96,8 @@ export const App = () => {
                         changTaskStatus = {changTaskStatus}
                         filter = {el.filter}
                         removeTodolist = {removeTodolist}
+                        onChangeTodolist={onChangeTodolist}
+                        onChangeNameTodolists={onChangeNameTodolists}
                     />
                     )
             })}

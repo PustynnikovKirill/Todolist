@@ -1,6 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {FilterType} from "./App";
 import {AddItemForm} from "./AddItemForm";
+import {EditableSpan} from "./EditableSpan";
 
 
 export type TodolistType = {
@@ -13,6 +14,8 @@ export type TodolistType = {
     changTaskStatus: (todolistId: string, id: string, checked: boolean) => void
     filter: FilterType
     removeTodolist:(todolistId:string)=>void
+    onChangeTodolist:(todolistId:string,el:string,newTitle:string)=>void
+    onChangeNameTodolists:(todolistId:string,newTitle:string)=>void
 }
 export type TaskType = {
     id: string,
@@ -25,14 +28,12 @@ export const Todolist: React.FC<TodolistType> = ({
                                                      name, tasks,
                                                      onClickRemoveTask, changeFilter,
                                                      addTask, changTaskStatus, filter, todolistId,
-                                                     removeTodolist
+                                                     removeTodolist, onChangeTodolist,
+                                                     onChangeNameTodolists
                                                  }) => {
-
-
     const addTasks = (title:string) => {
         addTask(todolistId,title)
     }
-
 
     const onClickRemoveHandler = (todolistId: string, id: string) => {
         onClickRemoveTask(todolistId, id)
@@ -50,11 +51,17 @@ export const Todolist: React.FC<TodolistType> = ({
     const removeTodolistHandler = () => {
         removeTodolist(todolistId)
     }
+    const onChangeNameTodolist = (newTitle:string) => {
+        onChangeNameTodolists(todolistId,newTitle)
+    }
 
     return (
         <div>
             <div>
-                <h3>{name}
+                <h3> <EditableSpan
+                    title={name}
+                    onChange={onChangeNameTodolist}
+                />
                     <button onClick={removeTodolistHandler}>x</button>
                 </h3>
 
@@ -70,9 +77,15 @@ export const Todolist: React.FC<TodolistType> = ({
                     const onChangeHandler = (ev: ChangeEvent<HTMLInputElement>) => {
                         changTaskStatus(todolistId, el.id, ev.currentTarget.checked)
                     }
+                    const onChange = (newTitle:string) => {
+                        onChangeTodolist(todolistId,el.id,newTitle)
+                    }
                     return <li key={el.id} className={el.isDone === true ? 'is-done' : ''}>
                         <input type="checkbox" checked={el.isDone} onChange={onChangeHandler}/>
-                        <span>{el.title}</span>
+                        <EditableSpan
+                            title={el.title}
+                            onChange={onChange}
+                        />
                         <button onClick={onClickRemoveMapHandler}>✖</button>
                     </li>
                 })}
@@ -81,10 +94,10 @@ export const Todolist: React.FC<TodolistType> = ({
                 <button onClick={onClickButtonAllHandler} className={filter === 'all' ? 'active-filter' : ''}>All
                 </button>
                 <button onClick={onClickButtonActiveHandler}
-                        className={filter === 'active' ? 'active-filter' : ''}>Active
+                        className={filter === 'active' ? 'active-filter':''}>Active
                 </button>
                 <button onClick={onClickButtonCompletedHandler}
-                        className={filter === 'completed' ? 'active-filter' : ''}>Completed
+                        className={filter === 'completed' ? 'active-filter':''}>Completed
                 </button>
             </div>
         </div>

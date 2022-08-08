@@ -20,7 +20,8 @@ export const AddItemForm:React.FC<AddItemFormType> = ({addItem}) => {
     const onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
-    const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+
+    const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>)=>{
         setError(null)
         if (title.trim() !== '') {
             if (event.key === 'Enter') {
