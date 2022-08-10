@@ -6,7 +6,7 @@ import {AddItemForm} from "./AddItemForm";
 
 export type FilterType = 'all'|'active'|'completed'
 
-export type TodolistsType = {
+export type TodolistType = {
     id:string,
     title: string,
     filter:FilterType
@@ -20,7 +20,7 @@ export const App = () => {
     let todolistID1 = v1()
     let todolistID2 = v1()
 
-    let [todolists, setTodolists] = useState<Array<TodolistsType>>([
+    let [todolists, setTodolists] = useState<Array<TodolistType>>([
         {id: todolistID1, title: 'What to learn', filter: 'all'},
         {id: todolistID2, title: 'What to buy', filter: 'all'},
     ])
@@ -39,7 +39,7 @@ export const App = () => {
 
     const addTodolist = (title:string) => {
         const newTodolistId = v1()
-        const newTodolist:TodolistsType = {id: newTodolistId, title, filter: 'all'}
+        const newTodolist:TodolistType = {id: newTodolistId, title, filter: 'all'}
             setTodolists([...todolists,newTodolist])
         setTasks({
         ...tasks,[newTodolistId]:[]
