@@ -6,16 +6,16 @@ import {
     todolistsReducer
 } from './todolists-reducer'
 import { v1 } from 'uuid'
-import {TodolistType} from "../App";
-import {FilterType} from "../App";
+import {TodolistType,FilterType} from "../App";
+
 
 let todolistId1:string
 let todolistId2:string
 let startState: Array<TodolistType>
 
 beforeEach(()=>{
-    let todolistId1 = v1()
-    let todolistId2 = v1()
+    todolistId1 = v1()
+    todolistId2 = v1()
 
     startState = [
         {id: todolistId1, title: 'What to learn', filter: 'all'},
