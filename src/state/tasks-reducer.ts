@@ -25,7 +25,6 @@ export const tasksReducer = (state:TasksStateType = initialState, action: Action
 export type ActionType = removeTaskACType| addTaskACType
     | changeTaskStatusACType | changeTaskTitleACType | addTodolistACType
 
-
 type removeTaskACType = ReturnType<typeof removeTaskAC>
 export const removeTaskAC =(todolistId:string,id:string)=> {
     return {

@@ -1,7 +1,7 @@
-import React, {useReducer, useState} from 'react';
+import React, {useCallback} from 'react';
 import './App.css';
 import {TaskType, Todolist} from "./Todolist";
-import {v1} from "uuid";
+
 import {AddItemForm} from "./AddItemForm";
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./state/tasks-reducer";
 import {
@@ -32,34 +32,39 @@ export const AppWithRedux = () => {
     const dispatch = useDispatch()
 
 
-    const addTodolist = (title:string) => {
+    const addTodolist =useCallback( (title:string) => {
         dispatch(addTodolistAC(title))
         dispatch(addTodolistAC(title))
-    }
+    },[])
 
-    const changeFilter = (todolistId:string,filter:FilterType) => {
+    const changeFilter = useCallback((todolistId:string,filter:FilterType) => {
         dispatch(changeTodolistFilter(todolistId,filter))
-    }
+    },[])
 
-    const removeTask = (todilistId:string,id:string) => {
+    const removeTask = useCallback((todilistId:string,id:string) => {
         dispatch(removeTaskAC(todilistId,id))
-    }
+    },[])
 
-    const addTask = (todolistsId:string,title:string) => {
+    const addTask = useCallback((todolistsId:string,title:string) => {
         dispatch(addTaskAC(todolistsId,title))
-    }
-    const changTaskStatus = (todolistId:string, id:string,checked:boolean) => {
+    },[])
+
+    const changTaskStatus = useCallback((todolistId:string, id:string,checked:boolean) => {
         dispatch(changeTaskStatusAC(todolistId,id,checked))
-    }
-    const removeTodolist = (todolistId:string) => {
+    },[])
+
+    const removeTodolist = useCallback((todolistId:string) => {
         dispatch(removeTodolistAC(todolistId))
-    }
-    const onChangeTodolist = (todolistId:string,id:string,newTitle:string) => {
+    },[])
+
+    const onChangeTodolist = useCallback((todolistId:string,id:string,newTitle:string) => {
         dispatch(changeTaskTitleAC(todolistId,id,newTitle))
-    }
-    const onChangeNameTodolists = (todolistId:string,newTitle:string) => {
+    },[])
+
+    const onChangeNameTodolists = useCallback((todolistId:string,newTitle:string) => {
         dispatch(changeTodolistTitle(todolistId,newTitle))
-    }
+    },[])
+
     return (
         <div className="App">
             <AddItemForm  addItem = {addTodolist}/>

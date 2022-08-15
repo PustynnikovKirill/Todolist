@@ -1,10 +1,11 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useCallback} from "react";
 import {FilterType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 
 
 export type TodolistType = {
+
     todolistId: string
     name: string
     tasks: TaskType[]
@@ -24,16 +25,16 @@ export type TaskType = {
 }
 
 
-export const Todolist: React.FC<TodolistType> = ({
+export const Todolist: React.FC<TodolistType> = React.memo( ({
                                                      name, tasks,
                                                      onClickRemoveTask, changeFilter,
                                                      addTask, changTaskStatus, filter, todolistId,
                                                      removeTodolist, onChangeTodolist,
                                                      onChangeNameTodolists
                                                  }) => {
-    const addTasks = (title:string) => {
+    const addTasks = useCallback((title:string) => {
         addTask(todolistId,title)
-    }
+    },[])
 
     const onClickRemoveHandler = (todolistId: string, id: string) => {
         onClickRemoveTask(todolistId, id)
@@ -102,4 +103,4 @@ export const Todolist: React.FC<TodolistType> = ({
             </div>
         </div>
     )
-}
+})
