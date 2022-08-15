@@ -70,20 +70,13 @@ export const AppWithRedux = () => {
             <AddItemForm  addItem = {addTodolist}/>
             {todolists.map(el=> {
 
-                let taskForTodolist = tasks[el.id]
 
-                if (el.filter === 'completed') {
-                    taskForTodolist = tasks[el.id].filter(el=>el.isDone === true)
-                }
-                if (el.filter === 'active') {
-                    taskForTodolist = tasks[el.id].filter(el=>el.isDone === false)
-                }
                 return (
                     <Todolist
                         key = {el.id}
                         todolistId = {el.id}
                         name = {el.title}
-                        tasks={taskForTodolist}
+                        tasks={tasks[el.id]}
                         onClickRemoveTask = {removeTask}
                         changeFilter = {changeFilter}
                         addTask={addTask}

@@ -2,6 +2,7 @@ import React, {ChangeEvent, useCallback} from "react";
 import {FilterType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
+import {TasksStateType} from "./AppWithRedux";
 
 
 export type TodolistType = {
@@ -54,6 +55,13 @@ export const Todolist: React.FC<TodolistType> = React.memo( ({
     }
     const onChangeNameTodolist = (newTitle:string) => {
         onChangeNameTodolists(todolistId,newTitle)
+    }
+    
+    if (filter === 'completed') {
+        tasks = tasks.filter(el=>el.isDone === true)
+    }
+    if (filter === 'active') {
+        tasks = tasks.filter(el=>el.isDone === false)
     }
 
     return (
