@@ -13,7 +13,7 @@ export const EditableSpan:React.FC<EditableSpan> = ({title,onChange}) => {
         setEditMode(true)
         setNewTitle(title)
     }
-    const activateViewMode = () => {
+    const activateViewMode =()=> {
         setEditMode(!editMode)
         onChange(newTitle)
     }

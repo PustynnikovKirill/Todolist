@@ -3,6 +3,7 @@ import {FilterType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import {TasksStateType} from "./AppWithRedux";
+import {Task} from "./state/task";
 
 
 export type TodolistType = {
@@ -16,7 +17,7 @@ export type TodolistType = {
     changTaskStatus: (todolistId: string, id: string, checked: boolean) => void
     filter: FilterType
     removeTodolist:(todolistId:string)=>void
-    onChangeTodolist:(todolistId:string,el:string,newTitle:string)=>void
+    onChangeTodolist:(todolistId:string,id:string,newTitle:string)=>void
     onChangeNameTodolists:(todolistId:string,newTitle:string)=>void
 }
 export type TaskType = {
@@ -35,35 +36,39 @@ export const Todolist: React.FC<TodolistType> = React.memo( ({
                                                  }) => {
     const addTasks = useCallback((title:string) => {
         addTask(todolistId,title)
-    },[])
+    },[todolistId,addTask])
 
-    const onClickRemoveHandler = (todolistId: string, id: string) => {
-        onClickRemoveTask(todolistId, id)
-    }
 
-    const onClickButtonAllHandler = () => {
+    const onClickButtonAllHandler = useCallback(() => {
         changeFilter(todolistId, 'all')
-    }
-    const onClickButtonActiveHandler = () => {
+    },[changeFilter,todolistId])
+    const onClickButtonActiveHandler = useCallback(() => {
         changeFilter(todolistId, 'active')
-    }
-    const onClickButtonCompletedHandler = () => {
+    },[changeFilter,todolistId])
+    const onClickButtonCompletedHandler =useCallback( () => {
         changeFilter(todolistId, 'completed')
-    }
+    },[changeFilter,todolistId])
     const removeTodolistHandler = () => {
         removeTodolist(todolistId)
     }
     const onChangeNameTodolist = (newTitle:string) => {
         onChangeNameTodolists(todolistId,newTitle)
     }
-    
     if (filter === 'completed') {
         tasks = tasks.filter(el=>el.isDone === true)
     }
     if (filter === 'active') {
         tasks = tasks.filter(el=>el.isDone === false)
     }
-
+    const onClickRemoveMapHandler = (id:string)  => {
+        onClickRemoveTask(todolistId, id)
+    }
+    const onChangeHandler = (id:string, checked:boolean) => {
+        changTaskStatus(todolistId, id, checked)
+    }
+    const onChange = (id:string, newTitle:string) => {
+        onChangeTodolist(todolistId,id,newTitle)
+    }
     return (
         <div>
             <div>
@@ -80,23 +85,13 @@ export const Todolist: React.FC<TodolistType> = React.memo( ({
             </div>
             <ul>
                 {tasks.map(el => {
-                    const onClickRemoveMapHandler = () => {
-                        onClickRemoveHandler(todolistId, el.id)
-                    }
-                    const onChangeHandler = (ev: ChangeEvent<HTMLInputElement>) => {
-                        changTaskStatus(todolistId, el.id, ev.currentTarget.checked)
-                    }
-                    const onChange = (newTitle:string) => {
-                        onChangeTodolist(todolistId,el.id,newTitle)
-                    }
-                    return <li key={el.id} className={el.isDone === true ? 'is-done' : ''}>
-                        <input type="checkbox" checked={el.isDone} onChange={onChangeHandler}/>
-                        <EditableSpan
-                            title={el.title}
-                            onChange={onChange}
-                        />
-                        <button onClick={onClickRemoveMapHandler}>✖</button>
-                    </li>
+
+                    return <Task
+                        task = {el}
+                        changTaskStatus = {onChangeHandler}
+                        onClickRemoveTask={onClickRemoveMapHandler}
+                        onChangeTodolist = {onChange}
+                    />
                 })}
             </ul>
             <div>
