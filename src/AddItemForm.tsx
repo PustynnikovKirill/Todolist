@@ -1,48 +1,51 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import { AddBox } from '@mui/icons-material';
 
-export type AddItemFormType = {
-    addItem:(title:string)=>void
+type AddItemFormPropsType = {
+    addItem: (title: string) => void
 }
 
-export const AddItemForm:React.FC<AddItemFormType> = React.memo(({addItem}) => {
+export const AddItemForm = React.memo(function (props: AddItemFormPropsType) {
+    console.log('AddItemForm called')
+
     let [title, setTitle] = useState('')
     let [error, setError] = useState<string | null>(null)
 
-    const addItems = () => {
+    const addItem = () => {
         if (title.trim() !== '') {
-            addItem(title.trim())
-            setTitle('')
+            props.addItem(title);
+            setTitle('');
         } else {
-            setError('Title is requerid')
+            setError('Title is required');
         }
     }
 
-    const onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
 
-    const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>)=>{
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (error !== null) {
-            setError(null)
+            setError(null);
         }
-        if (title.trim() !== '') {
-            if (event.key === 'Enter') {
-                addItem(title.trim())
-                setTitle('')
-            }
-        } else {
-            setError('Title is requerid')
+        if (e.charCode === 13) {
+            addItem();
         }
-
     }
-    return (
-        <div>
-            <input value={title}
+
+    return <div>
+        <TextField variant="outlined"
+                   error={!!error}
+                   value={title}
                    onChange={onChangeHandler}
                    onKeyPress={onKeyPressHandler}
-                   className={error ? 'error' : ''}/>
-            <button onClick={addItems}>+</button>
-            {error && <div className={'error-message'}>{error}</div>}
-        </div>
-        )
+                   label="Title"
+                   helperText={error}
+        />
+        <IconButton color="primary" onClick={addItem}>
+            <AddBox/>
+        </IconButton>
+    </div>
 })
