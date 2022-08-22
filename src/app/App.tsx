@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useCallback} from 'react'
 import './App.css'
 import { TodolistsList } from '../features/TodolistsList/TodolistsList'
 
@@ -12,10 +12,14 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import { Menu } from '@mui/icons-material';
+import {LinearProgress} from "@mui/material";
+import {useSelector} from "react-redux";
+import {initialState, RequestStatusType} from "./app-reducer";
+import {AppRootStateType} from "./store";
 
 
 function App() {
-
+    const status = useSelector<AppRootStateType,RequestStatusType>(state => state.app.status)
     return (
         <div className="App">
             <AppBar position="static">
@@ -28,6 +32,7 @@ function App() {
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
+                {status === 'loading' &&<LinearProgress/>}
             </AppBar>
             <Container fixed>
                 <TodolistsList/>
