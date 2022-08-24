@@ -15,11 +15,13 @@ import { Menu } from '@mui/icons-material';
 import {LinearProgress} from "@mui/material";
 import {useSelector} from "react-redux";
 import {initialState, RequestStatusType} from "./app-reducer";
-import {AppRootStateType} from "./store";
+import {AppRootStateType, useAppSelector} from "./store";
+import {ErrorSnackbar} from "../components/Error/ErrorSnackbar";
 
 
 function App() {
-    const status = useSelector<AppRootStateType,RequestStatusType>(state => state.app.status)
+    // const status = useSelector<AppRootStateType,RequestStatusType>(state => state.app.status)
+    const status = useAppSelector(state => state.app.status)
     return (
         <div className="App">
             <AppBar position="static">
@@ -37,6 +39,7 @@ function App() {
             <Container fixed>
                 <TodolistsList/>
             </Container>
+           <ErrorSnackbar/>
         </div>
     )
 }
