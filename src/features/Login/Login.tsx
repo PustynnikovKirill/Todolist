@@ -8,6 +8,8 @@ import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from "formik";
+import {loginTC} from "./authReducer";
+import {useDispatch} from "react-redux";
 
 type FormikErrorType = {
     email?: string
@@ -16,6 +18,7 @@ type FormikErrorType = {
 }
 
 export const Login = () => {
+    const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -36,9 +39,8 @@ export const Login = () => {
             }
             return errors
         },
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
-            formik.resetForm()
+        onSubmit: (values) => {
+            dispatch(loginTC(values))
         },
     });
     return <Grid container justifyContent={'center'}>
