@@ -5,7 +5,8 @@ import {handleServerNetworkError} from "../utils/error-utils";
 
 const initialState: InitialStateType = {
     status: 'idle',
-    error: null
+    error: null,
+    isInitialize: false
 }
 
 export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -14,6 +15,8 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
             return {...state, status: action.status}
         case 'APP/SET-ERROR':
             return {...state, error: action.error}
+        case 'APP/isInitialize':
+            return {...state, isInitialize: action.isInitialize}
         default:
             return {...state}
     }
@@ -25,10 +28,12 @@ export type InitialStateType = {
     status: RequestStatusType
     // если ошибка какая-то глобальная произойдёт - мы запишем текст ошибки сюда
     error: string | null
+    isInitialize:boolean
 }
 
 export const setAppErrorAC = (error: string | null) => ({type: 'APP/SET-ERROR', error} as const)
 export const setAppStatusAC = (status: RequestStatusType) => ({type: 'APP/SET-STATUS', status} as const)
+export const setnitializeAC = ( isInitialize:boolean) => ({type: 'APP/isInitialize', isInitialize} as const)
 
 export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
 export type SetAppStatusActionType = ReturnType<typeof setAppStatusAC>
@@ -39,6 +44,7 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
         .then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(setIsLoggedInAC(true));
+                dispatch(setnitializeAC(true))
             }
         })
         .catch((error) => {
@@ -50,3 +56,4 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
 type ActionsType =
     | SetAppErrorActionType
     | SetAppStatusActionType
+| ReturnType <typeof setnitializeAC>
