@@ -13,15 +13,22 @@ export const TodoApi = {
         return instance.get<TodoType[]>(`todo-lists`)
     },
     createTodo(title: string) {
-        return instance.post<CreateTodoResponseType>(`todo-lists`, {title})
+        return instance.post<CommonResponseType<{item:TodoType}>>(`todo-lists`, {title})
     },
 
     deleteTodo(todolistId: string) {
-        return instance.delete<DeleteAndUpdateTodolistType>(`todo-lists/${todolistId}`,)
+        return instance.delete<CommonResponseType>(`todo-lists/${todolistId}`,)
     },
     updateTodo(todolistId: string, title: string) {
-        return instance.put<DeleteAndUpdateTodolistType>(`todo-lists/${todolistId}`, {title})
+        return instance.put<CommonResponseType>(`todo-lists/${todolistId}`, {title})
     }
+}
+
+type CommonResponseType<T = {}> = {
+    messages: string;
+    fieldsErrors:string;
+    resultCode: number;
+    data: T;
 }
 
 
@@ -31,18 +38,5 @@ export type TodoType = {
 	addedDate: string;
 	order: number;
 }
-export type CreateTodoResponseType = {
-	messages: string;
-	fieldsErrors:string;
-	resultCode: number;
-    data: {
-        item:TodoType
-    };
-}
-export type DeleteAndUpdateTodolistType = {
-	messages: string;
-	fieldsErrors: string;
-	resultCode: number;
-    data:{};
-}
+
 
