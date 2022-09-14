@@ -62,9 +62,9 @@ const initialState: TasksStateType = {
 export const tasksReducer = (state: TasksStateType = initialState, action: ActionsType): TasksStateType => {
     switch (action.type) {
         case "FETCH-TASK": {
-           const stateCopy = {...state}
-            stateCopy[action.todolistId] = action.tasks
-            return stateCopy
+           // const stateCopy = {...state}
+           //  stateCopy[action.todolistId] = action.tasks
+            return {...state,[action.todolistId]:action.tasks}
         }
         case 'SET-TODOS': {
            const stateCopy = {...state}
@@ -152,3 +152,10 @@ export const fetchTaskTC = (todoloistId:string)=> (dispatch:Dispatch) => {
         })
 }
 
+
+export const deleteTaskTC = (todoloistId:string, taskId:string)=> (dispatch:Dispatch) => {
+    todolistsAPI.deleteTask(todoloistId,taskId)
+        .then((res)=>{
+            dispatch(removeTaskAC(taskId,todoloistId))
+        })
+}
