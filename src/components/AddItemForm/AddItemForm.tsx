@@ -1,24 +1,22 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
-import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
-import { AddBox } from '@mui/icons-material';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react'
+import {IconButton, TextField} from '@material-ui/core'
+import {AddBox} from '@material-ui/icons'
 
+export type AddItemFormSubmitHelperType = { setError: (error: string) => void, setTitle: (title: string) => void}
 type AddItemFormPropsType = {
-    addItem: (title: string) => void
+    addItem: (title: string, helper: AddItemFormSubmitHelperType) => void
+    disabled?: boolean
 }
 
-export const AddItemForm = React.memo(function (props: AddItemFormPropsType) {
-    console.log('AddItemForm called')
-
+export const AddItemForm = React.memo(function ({addItem, disabled = false}: AddItemFormPropsType) {
     let [title, setTitle] = useState('')
     let [error, setError] = useState<string | null>(null)
 
-    const addItem = () => {
+    const addItemHandler = async () => {
         if (title.trim() !== '') {
-            props.addItem(title);
-            setTitle('');
+                addItem(title, {setError, setTitle})
         } else {
-            setError('Title is required');
+            setError('Title is required')
         }
     }
 
@@ -28,15 +26,16 @@ export const AddItemForm = React.memo(function (props: AddItemFormPropsType) {
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (error !== null) {
-            setError(null);
+            setError(null)
         }
         if (e.charCode === 13) {
-            addItem();
+            addItemHandler()
         }
     }
 
     return <div>
         <TextField variant="outlined"
+                   disabled={disabled}
                    error={!!error}
                    value={title}
                    onChange={onChangeHandler}
@@ -44,7 +43,7 @@ export const AddItemForm = React.memo(function (props: AddItemFormPropsType) {
                    label="Title"
                    helperText={error}
         />
-        <IconButton color="primary" onClick={addItem}>
+        <IconButton color="primary" onClick={addItemHandler} disabled={disabled} style={{marginLeft: '5px'}}>
             <AddBox/>
         </IconButton>
     </div>
