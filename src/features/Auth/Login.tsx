@@ -6,7 +6,8 @@ import {login} from './auth-reducer'
 import {Redirect} from 'react-router-dom'
 import {selectIsLoggedIn} from './selectors'
 import {authActions} from './index'
-import {useAppDispatch} from '../../utils/redux-utils'
+import {Action} from 'redux'
+import {useActions, useAppDispatch} from '../../utils/redux-utils'
 
 type FormValuesType = {
     email: string
