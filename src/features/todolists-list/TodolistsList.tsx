@@ -1,15 +1,15 @@
 import React, { useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { FilterValuesType, todolistsActions, todolistsThunks } from 'features/TodolistsList/todolists.reducer'
-import { tasksThunks } from 'features/TodolistsList/tasks.reducer'
+import { FilterValuesType, todolistsActions, todolistsThunks } from 'features/todolists-list/todolists/todolists.reducer'
+import { tasksThunks } from 'features/todolists-list/tasks/tasks.reducer'
 import { Grid, Paper } from '@mui/material'
 import { AddItemForm } from 'common/components'
-import { Todolist } from './Todolist/Todolist'
+import { Todolist } from './todolists/Todolist/Todolist'
 import { Navigate } from 'react-router-dom'
 import { useActions } from 'common/hooks';
 import { selectIsLoggedIn } from 'features/auth/auth.selectors';
-import { selectTasks } from 'features/TodolistsList/tasks.selectors';
-import { selectTodolists } from 'features/TodolistsList/todolists.selectors';
+import { selectTasks } from 'features/todolists-list/tasks/tasks.selectors';
+import { selectTodolists } from 'features/todolists-list/todolists/todolists.selectors';
 import { TaskStatuses } from 'common/enums';
 
 
@@ -26,19 +26,16 @@ export const TodolistsList = () => {
 	} = useActions(todolistsThunks)
 
 
-	const {addTask: addTaskThunk, removeTask: removeTaskThunk, updateTask} = useActions(tasksThunks)
+	const {addTask: addTaskThunk, updateTask} = useActions(tasksThunks)
 	const {changeTodolistFilter} = useActions(todolistsActions)
 
 	useEffect(() => {
 		if (!isLoggedIn) {
 			return;
 		}
-		fetchTodolists()
+		fetchTodolists({})
 	}, [])
 
-	const removeTask = useCallback(function (taskId: string, todolistId: string) {
-		removeTaskThunk({taskId, todolistId})
-	}, [])
 
 	const addTask = useCallback(function (title: string, todolistId: string) {
 		addTaskThunk({title, todolistId})
@@ -86,7 +83,6 @@ export const TodolistsList = () => {
 							<Todolist
 								todolist={tl}
 								tasks={allTodolistTasks}
-								removeTask={removeTask}
 								changeFilter={changeFilter}
 								addTask={addTask}
 								changeTaskStatus={changeStatus}
