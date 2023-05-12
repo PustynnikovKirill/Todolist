@@ -2,6 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {IconButton, TextField} from '@mui/material';
 import {AddBox} from '@mui/icons-material';
 import {ResponseType} from "common/types";
+import {RejectValueType} from "common/utils/create-app-async-thunk";
 
 
 type Props = {
@@ -20,8 +21,11 @@ export const AddItemForm = React.memo( ({addItem, disabled = false}: Props) => {
                 .then(() => {
                     setTitle('');
                 })
-                .catch((res:ResponseType) => {
-                    setError(res.messages[0])
+                .catch((err: RejectValueType) => {
+                    if (err.data) {
+                        const messages = err.data.messages
+                        setError(messages.length ? messages[0] : 'Some error occurred')
+                    }
                 })
 
         } else {
